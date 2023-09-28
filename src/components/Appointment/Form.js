@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-
 import InterviewerList from "components/InterviewerList";
 import Button from "components/Button";
 
@@ -25,7 +24,10 @@ export default function Form(props) {
       return;
     }
 
-    setError("");
+    if (interviewer === null) {
+        setError("Please select an interviewer");
+        return;
+      }
     props.onSave(name, interviewer);
   }
 
