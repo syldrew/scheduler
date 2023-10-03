@@ -1,5 +1,7 @@
 import React from "react";
+
 import "components/Appointment/styles.scss";
+
 import Header from "components/Appointment/Header";
 
 import Empty from "components/Appointment/Empty";
@@ -29,15 +31,15 @@ export default function Appointment(props) {
       student: name,
       interviewer
     };
-
+  
     transition(SAVING);
-
+  
     props
       .bookInterview(props.id, interview)
       .then(() => transition(SHOW))
       .catch(error => transition(ERROR_SAVE, true));
   }
-
+  
   function destroy() {
     transition(DELETING, true);
     props
@@ -50,20 +52,11 @@ export default function Appointment(props) {
     props.interview ? SHOW : EMPTY
   );
 
-
+  
   return (
-
+    
     <article className="appointment" data-testid="appointment">
       <Header time={props.time} />
-      {props.interview ?
-        <Show
-          student={props.interview.student}
-          interviewer={props.interview.interviewer}
-          onDelete={() => console.log("CONFIRM")}
-          onEdit={() => console.log("EDIT")}
-        />
-        :
-        <Empty onAdd={() => console.log("CREATE")} />}
         {mode === EMPTY && <Empty onAdd={() => transition(CREATE)} />}
 
         {mode === SHOW &&
